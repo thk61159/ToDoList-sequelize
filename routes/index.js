@@ -1,23 +1,32 @@
 ///////////////////////impot////////////////////////
 const router = require('express').Router()
-const home = require('./modules/home')
-const todos = require('./modules/todos')
+const auth = require('./modules/auth')
 
-const { authenticator } = require('../middleware/auth') // 掛載 middleware
-const { backbtn } = require('../middleware/backbtn')
+const { authenticator } = require('../middleware/auth') 
 const userController = require('../controllers/user-controller')
+const todoController = require('../controllers/todo-controller')
 ///////////////////////router setting////////////////////////
-router.use('/todos', authenticator, backbtn, todos) // 加入驗證程序
+
 router.get('/users/login', userController.loginPage)
 router.post('/users/login', userController.login)
 router.get('/users/register', userController.registerPage)
 router.post('/users/register', userController.register)
+router.get('/users/logout', userController.logout)
+router.use('/auth', auth);
+router.use('/', authenticator)
 
-// router.use('/auth', auth);
-router.use('/', authenticator, home) // 加入驗證程序
+router.get('/todos/:id/edit', todoController.editPage)
+router.put('/todos/:id', todoController.editTodo)
+router.delete('/todos/:id', todoController.deleteTodo)
+router.get('/todos/:id', todoController.detailPage)
+router.get('/', todoController.homePage)
+router.get('/todos/new', todoController.newPage)
+router.post('/todos/new', todoController.newTodo)
+
+
+//error handler
 router.use('/', (err, req, res, next) => {
 	if (err instanceof Error) {
-		console.log(err)
 		req.flash('error_msg', `${err.name}: ${err.message}`)
 	} else {
 		req.flash('error_msg', `${err}`)
