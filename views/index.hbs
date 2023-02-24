@@ -1,22 +1,27 @@
-<ul class="list-group">
-  {{#each todos}}
-  <li class="list-group-item" style="border-bottom: solid 2px #44d9e8 ;">
-    <div class="row align-items-center justify-content-between">
-      <div class="col-auto mr-auto">
-        <input class="align-middle" type="checkbox" name="isDone" {{#if this.isDone}}checked{{/if}} disabled>
-        <h4 style="display:inline-block;">
-          {{this.name}}
-        </h4>
-      </div>
-      <div class="col-auto">
-        {{!-- <a class="btn btn-secondary align-middle" href="../../todos/{{ this._id }}">detail</a> --}}
-        <a class="btn btn-secondary align-middle" href="/todos/{{ this.id }}">detail</a>
-        <a class="btn btn-success align-middle" href="/todos/{{ this.id }}/edit">edit</a>
-        <form  action="/todos/{{ this.id }}?_method=DELETE" method="POST" style="display: inline;"><button class="btn btn-danger align-middle"
-            type="submit">delete</button></form>
-      </div>
-    </div>
-  </li>
-  {{/each}}
-</ul>
-<script src="../access.js"></script>
+{{> navBar logout = 'logout' }}
+{{> message}}
+<main class="mt-5">
+  <div class='container mt-3'>
+    <a href="/todos/new" class="btn btn-outline-success d-block mx-auto mb-5">new</a>
+    <ul class="list-group">
+      {{#each todos}}
+      <li class="list-group-item" style="border-bottom: solid 2px #44d9e8 ;">
+        <div class="row align-items-center justify-content-between">
+          <div class="col-auto mr-auto">
+            <input class="align-middle form-check-input" type="checkbox" name="isDone" {{#if this.isDone}}checked{{/if}} disabled>
+            <h4 style="display:inline-block;">
+              {{this.name}}
+            </h4>
+          </div>
+          <div class="col-auto">
+            <a class="btn btn-secondary align-middle" href="/todos/{{ this.id }}">detail</a>
+            <a class="btn btn-success align-middle" href="/todos/{{ this.id }}/edit">edit</a>
+            <form action="/todos/{{ this.id }}?_method=DELETE" method="POST" style="display: inline;"><button
+                class="btn btn-danger align-middle" type="submit">delete</button></form>
+          </div>
+        </div>
+      </li>
+      {{/each}}
+    </ul>
+  </div>
+</main>

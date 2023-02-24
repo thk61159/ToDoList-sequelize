@@ -1,10 +1,16 @@
-<form action="/todos/{{ todo.id }}?_method=DELETE" method="POST">
-  <div class="input-group">
-    <div class="input-group-text">
-      <input type="checkbox" name="isDone" {{#if todo.isDone}}checked{{/if}} disabled>
-    </div>
-    <input class="form-control " type="text" name="name" placeholder="name" value="{{ todo.name }}" disabled>
-    <a class="btn btn-success " href="/todos/{{ todo.id }}/edit">edit</a>
-    <button class="btn btn-danger " type="submit">delete</button>
+{{> navBar logout = 'logout'}}
+<main class="mt-5">
+  <div class='container mt-3'>
+    <form action="/todos/{{ todo.id }}?_method=DELETE" method="POST">
+      <div class="input-group">
+        <div class="input-group-text">
+          <input type="checkbox" name="isDone" {{#if todo.isDone}}checked{{/if}} disabled>
+        </div>
+        <input class="form-control " type="text" name="name" placeholder="name" value="{{ todo.name }}" disabled>
+        <a class="btn btn-success " href="/todos/{{ todo.id }}/edit">edit</a>
+        <button class="btn btn-danger " type="submit">delete</button>
+      </div>
+    </form>
+    <a class="btn btn-outline-secondary d-block mx-auto mt-3" href="javascript:history.back()">Back</a>
   </div>
-</form>
+</main>

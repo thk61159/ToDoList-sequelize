@@ -9,30 +9,7 @@
 </head>
 
 <body class='bg-light'>
-  <header>
-    <nav class='navbar navbar-dark justify-content-between bg-primary' style='padding: 8px 16px;'>
-      <a class="navbar-brand" href="/">
-        {{#if isAuthenticated}}{{ user.name}}'s {{/if}}
-        Todo List
-      </a>
-      {{#if isAuthenticated}}
-      <a href="/users/logout" class="btn btn-outline-light">Logout</a>
-      {{else}}
-      <a href="/users/login" class="btn btn-outline-light">Login</a>
-      {{/if}}
-    </nav>
-  </header>
-  <main class="mt-5">
-    <div class='container mt-3'>
       {{{body}}}
-    </div>
-  </main>
-
-  {{#unless hiddenLogoutBtn}}<a href="{{controller}}" class='btn btn-primary d-block mx-auto mt-3'
-    style='width: 18rem; border:none; margin-top:15%;'>{{sign}}</a>{{/unless}}
-
-
-  {{!-- <script src="/js/view.js"></script> --}}
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
     integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
     crossorigin="anonymous"></script>

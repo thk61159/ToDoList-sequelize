@@ -1,7 +1,13 @@
-<form action="/todos/new" method="POST" >
-  <div class="input-group">
-    <input class="form-control " type="text" name="name" placeholder="name">
-    <button class="btn btn-success " type="submit">create</button>
+{{> navBar logout = 'logout'}}
+<main class="mt-5">
+  <div class='container mt-3'>
+    <form action="/todos/new" method="POST">
+      <div class="input-group">
+        <input class="form-control " type="text" name="name" placeholder="name">
+        <button class="btn btn-success " type="submit">create</button>
+      </div>
+      <div class='text-danger'>{{note}}</div>
+    </form>
+    <a class="btn btn-outline-secondary d-block mx-auto mt-3" href="javascript:history.back()">Back</a>
   </div>
-    <div class='text-danger'>{{note}}</div>
-</form>
+</main>

@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const SEED_USER = {
   name: 'root',
   email: 'root@example.com',
-  password: '12345679',
+  password: '12345678',
 };
 module.exports = {
   up: (queryInterface, Sequelize) => {
