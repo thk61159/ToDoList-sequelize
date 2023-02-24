@@ -26,14 +26,17 @@ app.use(
   })
 );
 
+app.use(require('connect-flash')())
 // 呼叫 Passport 函式並傳入 app，這條要寫在路由之前
 usePassport(app);
 ///////////////////////routes////////////////////////
 app.use((req, res, next) => {
-  console.log(req,'??')
-  res.locals.isAuthenticated = req.isAuthenticated;
-  res.locals.user = req.user;
-  next();
+	res.locals.success_msg = req.flash('success_msg') 
+	res.locals.warning_msg = req.flash('warning_msg')
+	res.locals.error_msg = req.flash('error_msg') 
+	res.locals.isAuthenticated = req.isAuthenticated
+	res.locals.user = req.user
+	next()
 });
 
 app.use(routes);
