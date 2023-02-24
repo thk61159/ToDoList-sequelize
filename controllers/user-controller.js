@@ -30,9 +30,9 @@ const userController = {
 	},
 	register: async (req, res, next) => {
 		try {
-      const { name, email, password, confirmPassword } = req.body
-      const user = await User.findOne({ where: { email } })
-      checkData(name, email, password, confirmPassword, user)
+			const { name, email, password, confirmPassword } = req.body
+			const user = await User.findOne({ where: { email } })
+			checkData(name, email, password, confirmPassword, user)
 			const salt = await bcrypt.genSalt(10)
 			const hash = await bcrypt.hash(password, salt)
 			await User.create({
@@ -45,10 +45,13 @@ const userController = {
 			return next(err)
 		}
 	},
-	logout: (req, res) => {
-		req.logout()
-		res.redirect(`/users/login`)
-	}
+	logout: (req, res, next) => {
+		req.logout(req.user, err => {
+			if (err) return next(err)
+			req.flash('success_messages', '你已經成功登出。')
+			res.redirect('/login')
+		})
+	},
 }
 
 module.exports = userController
