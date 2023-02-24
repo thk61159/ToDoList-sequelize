@@ -15,13 +15,13 @@ router.get('/users/logout', userController.logout)
 router.use('/auth', auth);
 router.use('/', authenticator)
 
+router.get('/todos/new', todoController.newPage)
+router.post('/todos/new', todoController.newTodo)
 router.get('/todos/:id/edit', todoController.editPage)
 router.put('/todos/:id', todoController.editTodo)
 router.delete('/todos/:id', todoController.deleteTodo)
 router.get('/todos/:id', todoController.detailPage)
 router.get('/', todoController.homePage)
-router.get('/todos/new', todoController.newPage)
-router.post('/todos/new', todoController.newTodo)
 
 
 //error handler
@@ -33,6 +33,7 @@ router.use('/', (err, req, res, next) => {
 	}
 	res.redirect('back')
 	next(err)
-}) // 加入驗證程序
+}) 
+router.get('/*',(req,res)=>{res.redirect('/')})
 
 module.exports = router

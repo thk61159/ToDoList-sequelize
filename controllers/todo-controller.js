@@ -22,6 +22,8 @@ const todoController = {
 		try {
 			const { id } = req.params
 			const todo = await Todo.findByPk(id)
+			//如果在網址id後面加string會出現奇怪的事
+			if (!todo) throw new Error('此todo不存在')
 			return res.render('detail', { todo: todo.toJSON() })
 		} catch (err) {
 			return next(err)
@@ -32,6 +34,7 @@ const todoController = {
 		try {
 			const { id } = req.params
 			const todo = await Todo.findByPk(id)
+			if (!todo) throw new Error('此todo不存在')
 			return res.render('edit', { todo: todo.toJSON() })
 		} catch (err) {
 			return next(err)
